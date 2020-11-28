@@ -22,3 +22,21 @@ func (s *Server) handler() http.HandlerFunc {
 		go s.register(conn)
 	}
 }
+
+func (s *Server) register(conn *websocket.Conn) {
+	ch := make(chan bool, 1)
+
+	s.decks.AddNotificationChannel(ch)
+
+	// TODO: add data to channel.
+
+	for {
+		select {
+		case <-ch:
+			// TODO: add data to channel.
+		}
+	}
+
+	s.decks.RemoveNotificationChannel(ch)
+	conn.Close()
+}
