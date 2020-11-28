@@ -1,13 +1,12 @@
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
+github.com/andreburgaud/crypt2go v0.11.0 h1:2V2ccmaEDZuWTEU8tVMJkzueMknwpGPPQW5yqtjKeso=
 github.com/andreburgaud/crypt2go v0.11.0/go.mod h1:CNP8Da8FgPs0UEwpNh63NTb0zCPfQVlbY80BmdT42uw=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
-github.com/gorilla/websocket v1.4.2 h1:+/TMaTYc4QFitKJxsQ7Yye35DkWvkdLcvGKqM+x0Ufc=
-github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
-github.com/tombell/go-rekordbox v0.0.0-20201124195205-4b3445b4e2ff h1:4d8Q7vZNq26OkV6Zp2PHPiq0bRK7h8VcAoPqcxa9GKw=
-github.com/tombell/go-rekordbox v0.0.0-20201124195205-4b3445b4e2ff/go.mod h1:L1c4Tsbjjakfd/ByJS8O8/opuGNjgpsF1dxjx5jV3rE=
+github.com/xeodou/go-sqlcipher v0.0.0-20200727080346-d681773ef093 h1:B6yl+jqs5t4C27I16+t1gn28lPlZgjLGxZehsK+jFfA=
 github.com/xeodou/go-sqlcipher v0.0.0-20200727080346-d681773ef093/go.mod h1:aZ06jyRpOCqbZdcLUsn8agGfXzlKkHbQp/CjwRKwxSQ=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200317142112-1b76d66859c6/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
+golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897 h1:pLI5jrR7OSLijeIDcmRxNmw2api+jEfxLoykJVice/E=
 golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/net v0.0.0-20180218175443-cbe0f9307d01/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
