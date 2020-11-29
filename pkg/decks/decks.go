@@ -35,3 +35,17 @@ func (d *Decks) RemoveNotificationChannel(ch chan bool) {
 
 	delete(d.listeners, ch)
 }
+
+// All returns all the known decks.
+func (d *Decks) All() map[int]*Deck {
+	d.Lock()
+	defer d.Unlock()
+
+	all := make(map[int]*Deck, 0)
+
+	for _, deck := range d.decks {
+		all[deck.ID] = deck
+	}
+
+	return all
+}
