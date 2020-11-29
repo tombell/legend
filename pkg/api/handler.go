@@ -14,7 +14,6 @@ func (s *Server) handler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		conn, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
-			// TODO: error logging
 			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
@@ -28,15 +27,24 @@ func (s *Server) register(conn *websocket.Conn) {
 
 	s.decks.AddNotificationChannel(ch)
 
-	// TODO: add data to channel.
+	defer func() {
+		s.decks.RemoveNotificationChannel(ch)
+		conn.Close()
+	}()
+
+	resp := buildResponse(s.decks.All())
+	if err := conn.WriteJSON(resp); err != nil {
+		return
+	}
 
 	for {
 		select {
 		case <-ch:
-			// TODO: add data to channel.
+			resp := buildResponse(s.decks.All())
+			if err := conn.WriteJSON(resp); err != nil {
+				break
+			}
 		}
 	}
 
-	s.decks.RemoveNotificationChannel(ch)
-	conn.Close()
 }
