@@ -46,5 +46,4 @@ func (s *Server) register(conn *websocket.Conn) {
 			}
 		}
 	}
-
 }
