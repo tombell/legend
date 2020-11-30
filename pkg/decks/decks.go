@@ -1,6 +1,10 @@
 package decks
 
-import "sync"
+import (
+	"sync"
+
+	"github.com/tombell/go-rekordbox"
+)
 
 // Decks represents a set of decks inside rekordbox that have played tracks.
 type Decks struct {
@@ -48,4 +52,32 @@ func (d *Decks) All() map[int]*Deck {
 	}
 
 	return all
+}
+
+// Notify will notify the correct deck which is playing or has played the track,
+// and have it update the current track and append to that decks track history.
+// This will also create any decks which do not exist internally.
+func (d *Decks) Notify(track *rekordbox.Track) {
+	d.Lock()
+	defer d.Unlock()
+
+	deckID := 1
+
+	// XXX: right now we cannot get which deck the track played on, so since I
+	// only play using two decks, and I always play the first track on deck 1,
+	// let's assume, if the track number is even, it's played on deck 2.
+	if track.Number%2 == 0 {
+		deckID = 2
+	}
+
+	deck, ok := d.decks[deckID]
+	if !ok {
+		d.decks[deckID] = newDeck(deckID)
+	}
+
+	deck.notify(track)
+
+	for ch := range d.listeners {
+		ch <- true
+	}
 }
