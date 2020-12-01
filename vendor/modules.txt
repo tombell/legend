@@ -3,7 +3,7 @@ github.com/andreburgaud/crypt2go/ecb
 # github.com/gorilla/websocket v1.4.2
 ## explicit
 github.com/gorilla/websocket
-# github.com/tombell/go-rekordbox v0.0.2
+# github.com/tombell/go-rekordbox v0.0.3
 ## explicit
 github.com/tombell/go-rekordbox
 github.com/tombell/go-rekordbox/internal/crypto
