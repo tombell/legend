@@ -1,6 +1,8 @@
-
 VERSION?=dev
 COMMIT=$(shell git rev-parse HEAD | cut -c -8)
+
+CGO_LDFLAGS:=-L/usr/local/opt/openssl/lib
+CGO_CPPFLAGS:=-I/usr/local/opt/openssl/include
 
 LDFLAGS=-ldflags "-X main.version=${VERSION} -X main.commit=${COMMIT}"
 MODFLAGS=-mod=vendor
