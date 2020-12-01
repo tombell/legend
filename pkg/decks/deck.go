@@ -19,12 +19,11 @@ func newDeck(id int) *Deck {
 }
 
 func (d *Deck) notify(track *rekordbox.Track) {
-	if d.Current == nil || d.Current.ID != track.ID {
-		d.Current = track
-		d.History = append(d.History, track)
-	}
-
-	if d.Current.ID == track.ID {
+	if d.Current != nil && d.Current.ID == track.ID {
 		return
 	}
+
+	d.Current = track
+	d.History = append(d.History, track)
+
 }

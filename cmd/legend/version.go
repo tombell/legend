@@ -4,7 +4,7 @@ package main
 // environment variable and latest Git commit.
 
 // Version is the current version.
-var version = "dev"
+var Version = "dev"
 
 // Commit is the git commit for the build.
-var commit string
+var Commit string

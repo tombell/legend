@@ -3,6 +3,7 @@ package monitor
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/tombell/go-rekordbox"
@@ -12,47 +13,46 @@ import (
 
 // Monitor ...
 type Monitor struct {
+	logger   *log.Logger
 	db       *sql.DB
 	interval time.Duration
 	decks    *decks.Decks
 }
 
 // New ...
-func New(db *sql.DB, interval time.Duration) *Monitor {
+func New(logger *log.Logger, db *sql.DB, interval time.Duration, decks *decks.Decks) *Monitor {
 	return &Monitor{
 		db:       db,
 		interval: interval,
+		decks:    decks,
 	}
 }
 
 // Run ...
 func (m *Monitor) Run(ch chan error) {
-	track, err := m.fetchTrack()
-	if err != nil {
+	if err := m.handle(); err != nil {
 		ch <- err
 		return
 	}
 
-	m.decks.Notify(track)
-
 	tick := time.Tick(m.interval)
 
 	for range tick {
-		track, err := m.fetchTrack()
-		if err != nil {
+		if err := m.handle(); err != nil {
 			ch <- err
 			continue
 		}
-
-		m.decks.Notify(track)
 	}
 }
 
-func (m *Monitor) fetchTrack() (*rekordbox.Track, error) {
+func (m *Monitor) handle() error {
 	track, err := rekordbox.GetRecentTrack(m.db)
 	if err != nil {
-		return nil, fmt.Errorf("rekordbox get recent track failed: %w", err)
+		return fmt.Errorf("rekordbox get recent track failed: %w", err)
 	}
 
-	return track, nil
+	m.logger.Printf("notifying decks of current track: %s - %s", track.Artist, track.Name)
+	m.decks.Notify(track)
+
+	return nil
 }
