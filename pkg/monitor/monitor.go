@@ -22,6 +22,7 @@ type Monitor struct {
 // New ...
 func New(logger *log.Logger, db *sql.DB, interval time.Duration, decks *decks.Decks) *Monitor {
 	return &Monitor{
+		logger:   logger,
 		db:       db,
 		interval: interval,
 		decks:    decks,
