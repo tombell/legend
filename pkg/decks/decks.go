@@ -73,6 +73,7 @@ func (d *Decks) Notify(track *rekordbox.Track) {
 	deck, ok := d.decks[deckID]
 	if !ok {
 		d.decks[deckID] = newDeck(deckID)
+		deck = d.decks[deckID]
 	}
 
 	deck.notify(track)
