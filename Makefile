@@ -29,6 +29,6 @@ test:
 	@go test ${MODFLAGS} ${TESTFLAGS} ./...
 
 modules:
-	@go mod download && go mod tidy && go mod vendor
+	@CGO_LDFLAGS=${CGO_LDFLAGS} CGO_CPPFLAGS=${CGO_CPPFLAGS} go get -u ./... && go mod download && go mod tidy && go mod vendor
 
 .PHONY: all dev dist $(PLATFORMS) clean test modules

@@ -21,12 +21,7 @@ const rekordboxPath = "/Applications/rekordbox 6/rekordbox.app"
 
 // Run ...
 func Run(logger *log.Logger, listen, rekordboxPath string, interval time.Duration) error {
-	password, err := rekordbox.GetDatabasePassword(rekordboxPath)
-	if err != nil {
-		return fmt.Errorf("rekordbox get encrypted password failed: %w", err)
-	}
-
-	db, err := rekordbox.OpenDatabase(rekordboxPath, password)
+	db, err := rekordbox.OpenDatabase(rekordboxPath)
 	if err != nil {
 		return fmt.Errorf("rekordbox open database failed: %w", err)
 	}
