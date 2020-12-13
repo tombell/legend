@@ -16,11 +16,11 @@ type Monitor struct {
 	logger   *log.Logger
 	db       *sql.DB
 	interval time.Duration
-	decks    *decks.Decks
+	decks    *decks.Playlist
 }
 
 // New ...
-func New(logger *log.Logger, db *sql.DB, interval time.Duration, decks *decks.Decks) *Monitor {
+func New(logger *log.Logger, db *sql.DB, interval time.Duration, decks *decks.Playlist) *Monitor {
 	return &Monitor{
 		logger:   logger,
 		db:       db,

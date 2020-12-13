@@ -6,8 +6,8 @@ import (
 	"github.com/tombell/go-rekordbox"
 )
 
-// Decks represents a set of decks inside rekordbox that have played tracks.
-type Decks struct {
+// Playlist represents a set of decks inside rekordbox that have played tracks.
+type Playlist struct {
 	sync.Mutex
 
 	listeners map[chan bool]bool
@@ -15,9 +15,9 @@ type Decks struct {
 	Deck *Deck
 }
 
-// New returns an initialised Decks model.
-func New() *Decks {
-	return &Decks{
+// New returns an initialised Playlist model.
+func New() *Playlist {
+	return &Playlist{
 		Deck:      newDeck(),
 		listeners: make(map[chan bool]bool, 0),
 	}
@@ -25,7 +25,7 @@ func New() *Decks {
 
 // AddNotificationChannel adds a channel to be notified when the decks are
 // updated.
-func (d *Decks) AddNotificationChannel(ch chan bool) {
+func (d *Playlist) AddNotificationChannel(ch chan bool) {
 	d.Lock()
 	defer d.Unlock()
 
@@ -34,7 +34,7 @@ func (d *Decks) AddNotificationChannel(ch chan bool) {
 
 // RemoveNotificationChannel removes a channel from the list of notification
 // channels.
-func (d *Decks) RemoveNotificationChannel(ch chan bool) {
+func (d *Playlist) RemoveNotificationChannel(ch chan bool) {
 	d.Lock()
 	defer d.Unlock()
 
@@ -44,7 +44,7 @@ func (d *Decks) RemoveNotificationChannel(ch chan bool) {
 // Notify will notify the correct deck which is playing or has played the track,
 // and have it update the current track and append to that decks track history.
 // This will also create any decks which do not exist internally.
-func (d *Decks) Notify(track *rekordbox.Track) {
+func (d *Playlist) Notify(track *rekordbox.Track) {
 	d.Lock()
 	defer d.Unlock()
 
