@@ -1,4 +1,4 @@
-package decks
+package playlist
 
 import (
 	"sync"

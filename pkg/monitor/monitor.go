@@ -8,7 +8,7 @@ import (
 
 	"github.com/tombell/go-rekordbox"
 
-	"github.com/tombell/legend/pkg/decks"
+	"github.com/tombell/legend/pkg/playlist"
 )
 
 // Monitor ...
@@ -16,16 +16,16 @@ type Monitor struct {
 	logger   *log.Logger
 	db       *sql.DB
 	interval time.Duration
-	decks    *decks.Playlist
+	playlist *playlist.Playlist
 }
 
 // New ...
-func New(logger *log.Logger, db *sql.DB, interval time.Duration, decks *decks.Playlist) *Monitor {
+func New(logger *log.Logger, db *sql.DB, interval time.Duration, playlist *playlist.Playlist) *Monitor {
 	return &Monitor{
 		logger:   logger,
 		db:       db,
 		interval: interval,
-		decks:    decks,
+		playlist: playlist,
 	}
 }
 
@@ -52,8 +52,8 @@ func (m *Monitor) handle() error {
 		return fmt.Errorf("rekordbox get recent track failed: %w", err)
 	}
 
-	m.logger.Printf("notifying decks of current track: %s - %s", track.Artist, track.Name)
-	m.decks.Notify(track)
+	m.logger.Printf("notifying playlist of current track: %s - %s", track.Artist, track.Name)
+	m.playlist.Notify(track)
 
 	return nil
 }

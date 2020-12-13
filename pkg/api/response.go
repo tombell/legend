@@ -1,6 +1,6 @@
 package api
 
-import "github.com/tombell/legend/pkg/decks"
+import "github.com/tombell/legend/pkg/playlist"
 
 type trackResponse struct {
 	Artist   string `json:"artist"`
@@ -17,7 +17,7 @@ type response struct {
 	Deck *deckResponse `json:"deck"`
 }
 
-func buildResponse(deck *decks.Deck) *response {
+func buildResponse(deck *playlist.Deck) *response {
 	resp := &response{}
 
 	resp.Deck = &deckResponse{

@@ -1,4 +1,4 @@
-package decks
+package playlist
 
 import "github.com/tombell/go-rekordbox"
 
