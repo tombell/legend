@@ -15,11 +15,11 @@ import (
 type Server struct {
 	logger *log.Logger
 	server *http.Server
-	decks  *decks.Decks
+	decks  *decks.Playlist
 }
 
 // New returns an initialised Server with the given decks.
-func New(logger *log.Logger, decks *decks.Decks, listen string) *Server {
+func New(logger *log.Logger, decks *decks.Playlist, listen string) *Server {
 	server := &http.Server{
 		Addr:         listen,
 		ReadTimeout:  5 * time.Second,
