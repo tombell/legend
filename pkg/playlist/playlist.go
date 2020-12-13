@@ -6,24 +6,26 @@ import (
 	"github.com/tombell/go-rekordbox"
 )
 
-// Playlist represents a set of decks inside rekordbox that have played tracks.
+// Playlist represents the current track and track history of rekordbox.
 type Playlist struct {
 	sync.Mutex
 
 	listeners map[chan bool]bool
 
-	Deck *Deck
+	Current *rekordbox.Track
+	History []*rekordbox.Track
 }
 
 // New returns an initialised Playlist model.
 func New() *Playlist {
 	return &Playlist{
-		Deck:      newDeck(),
 		listeners: make(map[chan bool]bool, 0),
+		Current:   nil,
+		History:   make([]*rekordbox.Track, 0),
 	}
 }
 
-// AddNotificationChannel adds a channel to be notified when the decks are
+// AddNotificationChannel adds a channel to be notified when the playlist is
 // updated.
 func (d *Playlist) AddNotificationChannel(ch chan bool) {
 	d.Lock()
@@ -41,14 +43,18 @@ func (d *Playlist) RemoveNotificationChannel(ch chan bool) {
 	delete(d.listeners, ch)
 }
 
-// Notify will notify the correct deck which is playing or has played the track,
-// and have it update the current track and append to that decks track history.
-// This will also create any decks which do not exist internally.
+// Notify will notify will update the current track and history if the track has
+// changed from the current.
 func (d *Playlist) Notify(track *rekordbox.Track) {
 	d.Lock()
 	defer d.Unlock()
 
-	d.Deck.notify(track)
+	if d.Current != nil && d.Current.ID == track.ID {
+		return
+	}
+
+	d.Current = track
+	d.History = append(d.History, track)
 
 	for ch := range d.listeners {
 		ch <- true

@@ -8,32 +8,33 @@ type trackResponse struct {
 	AlbumArt string `json:"album_art"`
 }
 
-type deckResponse struct {
+type playlistResponse struct {
 	Current *trackResponse   `json:"current"`
 	History []*trackResponse `json:"history"`
 }
 
 type response struct {
-	Deck *deckResponse `json:"deck"`
+	Playlist *playlistResponse `json:"playlist"`
 }
 
-func buildResponse(deck *playlist.Deck) *response {
+func buildResponse(list *playlist.Playlist) *response {
 	resp := &response{}
 
-	resp.Deck = &deckResponse{
-		History: make([]*trackResponse, 0, len(deck.History)),
+	resp.Playlist = &playlistResponse{
+		Current: nil,
+		History: make([]*trackResponse, 0, len(list.History)),
 	}
 
-	if deck.Current != nil {
-		resp.Deck.Current = &trackResponse{
-			Artist:   deck.Current.Artist,
-			Name:     deck.Current.Name,
-			AlbumArt: deck.Current.ImagePath,
+	if list.Current != nil {
+		resp.Playlist.Current = &trackResponse{
+			Artist:   list.Current.Artist,
+			Name:     list.Current.Name,
+			AlbumArt: list.Current.ImagePath,
 		}
 	}
 
-	for _, track := range deck.History {
-		resp.Deck.History = append(resp.Deck.History, &trackResponse{
+	for _, track := range list.History {
+		resp.Playlist.History = append(resp.Playlist.History, &trackResponse{
 			Artist:   track.Artist,
 			Name:     track.Name,
 			AlbumArt: track.ImagePath,
