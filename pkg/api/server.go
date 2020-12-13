@@ -8,18 +8,18 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/tombell/legend/pkg/decks"
+	"github.com/tombell/legend/pkg/playlist"
 )
 
-// Server serves the status of the decks to clients via websockets.
+// Server serves the status of the playlist to clients via websockets.
 type Server struct {
-	logger *log.Logger
-	server *http.Server
-	decks  *decks.Playlist
+	logger   *log.Logger
+	server   *http.Server
+	playlist *playlist.Playlist
 }
 
-// New returns an initialised Server with the given decks.
-func New(logger *log.Logger, decks *decks.Playlist, listen string) *Server {
+// New returns an initialised Server with the given playlist.
+func New(logger *log.Logger, playlist *playlist.Playlist, listen string) *Server {
 	server := &http.Server{
 		Addr:         listen,
 		ReadTimeout:  5 * time.Second,
@@ -27,9 +27,9 @@ func New(logger *log.Logger, decks *decks.Playlist, listen string) *Server {
 	}
 
 	return &Server{
-		logger: logger,
-		server: server,
-		decks:  decks,
+		logger:   logger,
+		server:   server,
+		playlist: playlist,
 	}
 }
 
@@ -68,14 +68,14 @@ func (s *Server) handler() http.HandlerFunc {
 func (s *Server) register(conn *websocket.Conn) {
 	ch := make(chan bool, 1)
 
-	s.decks.AddNotificationChannel(ch)
+	s.playlist.AddNotificationChannel(ch)
 
 	defer func() {
-		s.decks.RemoveNotificationChannel(ch)
+		s.playlist.RemoveNotificationChannel(ch)
 		conn.Close()
 	}()
 
-	resp := buildResponse(s.decks.Deck)
+	resp := buildResponse(s.playlist.Deck)
 	if err := conn.WriteJSON(resp); err != nil {
 		return
 	}
@@ -83,7 +83,7 @@ func (s *Server) register(conn *websocket.Conn) {
 	for {
 		select {
 		case <-ch:
-			resp := buildResponse(s.decks.Deck)
+			resp := buildResponse(s.playlist.Deck)
 			if err := conn.WriteJSON(resp); err != nil {
 				break
 			}

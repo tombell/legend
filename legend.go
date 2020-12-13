@@ -13,8 +13,8 @@ import (
 	"github.com/tombell/go-rekordbox"
 
 	"github.com/tombell/legend/pkg/api"
-	"github.com/tombell/legend/pkg/decks"
 	"github.com/tombell/legend/pkg/monitor"
+	"github.com/tombell/legend/pkg/playlist"
 )
 
 const rekordboxPath = "/Applications/rekordbox 6/rekordbox.app"
@@ -26,12 +26,12 @@ func Run(logger *log.Logger, listen, rekordboxPath string, interval time.Duratio
 		return fmt.Errorf("rekordbox open database failed: %w", err)
 	}
 
-	decks := decks.New()
+	playlist := playlist.New()
 
 	errCh := make(chan error, 1)
 
-	m := monitor.New(logger, db, time.Second*30, decks)
-	s := api.New(logger, decks, listen)
+	m := monitor.New(logger, db, time.Second*30, playlist)
+	s := api.New(logger, playlist, listen)
 
 	go m.Run(errCh)
 	go s.Start(errCh)
