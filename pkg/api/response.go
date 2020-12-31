@@ -18,11 +18,10 @@ type response struct {
 }
 
 func buildResponse(list *playlist.Playlist) *response {
-	resp := &response{}
-
-	resp.Playlist = &playlistResponse{
-		Current: nil,
-		History: make([]*trackResponse, 0, len(list.History)),
+	resp := &response{
+		Playlist: &playlistResponse{
+			History: make([]*trackResponse, 0, len(list.History)),
+		},
 	}
 
 	if list.Current != nil {
