@@ -27,7 +27,13 @@ func main() {
 
 	logger := log.New(os.Stderr, "[legend] ", log.LstdFlags)
 
-	if err := legend.Run(logger, *listen, *rekordboxPath, *pollingInterval); err != nil {
+	options := &legend.Options{
+		Logger:   logger,
+		Listen:   *listen,
+		Interval: *pollingInterval,
+	}
+
+	if err := legend.Run(options); err != nil {
 		logger.Printf("error: %s", err)
 	}
 }

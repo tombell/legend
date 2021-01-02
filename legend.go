@@ -19,8 +19,15 @@ import (
 
 const rekordboxPath = "/Applications/rekordbox 6/rekordbox.app"
 
+// Options ...
+type Options struct {
+	Logger   *log.Logger
+	Listen   string
+	Interval time.Duration
+}
+
 // Run ...
-func Run(logger *log.Logger, listen, rekordboxPath string, interval time.Duration) error {
+func Run(options *Options) error {
 	db, err := rekordbox.OpenDatabase(rekordboxPath)
 	if err != nil {
 		return fmt.Errorf("rekordbox open database failed: %w", err)
@@ -30,8 +37,8 @@ func Run(logger *log.Logger, listen, rekordboxPath string, interval time.Duratio
 
 	errCh := make(chan error, 1)
 
-	m := monitor.New(logger, db, time.Second*30, playlist)
-	s := api.New(logger, playlist, listen)
+	m := monitor.New(options.Logger, db, options.Interval, playlist)
+	s := api.New(options.Logger, playlist, options.Listen)
 
 	go m.Run(errCh)
 	go s.Start(errCh)

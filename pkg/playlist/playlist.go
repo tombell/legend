@@ -20,7 +20,6 @@ type Playlist struct {
 func New() *Playlist {
 	return &Playlist{
 		listeners: make(map[chan bool]bool, 0),
-		Current:   nil,
 		History:   make([]*rekordbox.Track, 0),
 	}
 }
