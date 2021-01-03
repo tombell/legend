@@ -75,16 +75,14 @@ func (s *Server) register(conn *websocket.Conn) {
 		conn.Close()
 	}()
 
-	resp := s.playlist.BuildResponse()
-	if err := conn.WriteJSON(resp); err != nil {
+	if err := conn.WriteJSON(s.playlist.BuildResponse()); err != nil {
 		return
 	}
 
 	for {
 		select {
 		case <-ch:
-			resp := s.playlist.BuildResponse()
-			if err := conn.WriteJSON(resp); err != nil {
+			if err := conn.WriteJSON(s.playlist.BuildResponse()); err != nil {
 				break
 			}
 		}
