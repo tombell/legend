@@ -13,7 +13,7 @@ import (
 var (
 	listen          = flag.String("listen", ":8888", "")
 	rekordboxPath   = flag.String("rekordboxPath", "/Applications/rekordbox 6/rekordbox.app", "")
-	pollingInterval = flag.Duration("pollingInterval", time.Second*30, "")
+	pollingInterval = flag.Duration("pollingInterval", time.Second*10, "")
 	version         = flag.Bool("version", false, "")
 )
 
