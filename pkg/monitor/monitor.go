@@ -11,7 +11,7 @@ import (
 	"github.com/tombell/legend/pkg/playlist"
 )
 
-// Monitor ...
+// Monitor is a struct that polls rekordbox for the currently playing track.
 type Monitor struct {
 	logger   *log.Logger
 	db       *sql.DB
@@ -19,7 +19,7 @@ type Monitor struct {
 	playlist *playlist.Playlist
 }
 
-// New ...
+// New returns an initialised monitor.
 func New(logger *log.Logger, db *sql.DB, interval time.Duration, playlist *playlist.Playlist) *Monitor {
 	return &Monitor{
 		logger:   logger,
@@ -29,7 +29,7 @@ func New(logger *log.Logger, db *sql.DB, interval time.Duration, playlist *playl
 	}
 }
 
-// Run ...
+// Run starts the polling of the currently playing track in rekordbox.
 func (m *Monitor) Run(ch chan error) {
 	if err := m.handle(); err != nil {
 		ch <- err
