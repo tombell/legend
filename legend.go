@@ -19,14 +19,14 @@ import (
 
 const rekordboxPath = "/Applications/rekordbox 6/rekordbox.app"
 
-// Options ...
+// Options contains the configurable properties.
 type Options struct {
 	Logger   *log.Logger
 	Listen   string
 	Interval time.Duration
 }
 
-// Run ...
+// Run starts the API server, and rekordbox polling monitor.
 func Run(options *Options) error {
 	db, err := rekordbox.OpenDatabase(rekordboxPath)
 	if err != nil {
