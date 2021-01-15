@@ -2,6 +2,7 @@ package playlist
 
 // Track is the JSON representation of a played track in a playlist.
 type Track struct {
+	Number   int    `json:"number"`
 	Artist   string `json:"artist"`
 	Name     string `json:"name"`
 	AlbumArt string `json:"album_art"`
@@ -21,6 +22,7 @@ func (p *Playlist) BuildResponse() *Response {
 
 	if p.Current != nil {
 		resp.Current = &Track{
+			Number:   p.Current.Number,
 			Artist:   p.Current.Artist,
 			Name:     p.Current.Name,
 			AlbumArt: p.Current.ImagePath,
@@ -29,6 +31,7 @@ func (p *Playlist) BuildResponse() *Response {
 
 	for _, track := range p.History {
 		resp.History = append(resp.History, &Track{
+			Number:   track.Number,
 			Artist:   track.Artist,
 			Name:     track.Name,
 			AlbumArt: track.ImagePath,
