@@ -14,7 +14,8 @@ type Response struct {
 	History []*Track `json:"history"`
 }
 
-// BuildResponse ...
+// BuildResponse builds the response struct up ready to send to the websocket
+// clients.
 func (p *Playlist) BuildResponse() *Response {
 	resp := &Response{
 		History: make([]*Track, 0, len(p.History)),
