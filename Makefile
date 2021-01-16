@@ -12,23 +12,26 @@ PLATFORMS:=darwin
 
 all: dev
 
-dev:
+dev: build-web
 	@echo building dist/legend...
 	@CGO_LDFLAGS=${CGO_LDFLAGS} CGO_CPPFLAGS=${CGO_CPPFLAGS} go build ${MODFLAGS} ${LDFLAGS} -o dist/legend ./cmd/legend
 
-dist: $(PLATFORMS)
+dist: build-web $(PLATFORMS)
 
 $(PLATFORMS):
 	@echo building dist/legend-$@-amd64...
 	@CGO_LDFLAGS=${CGO_LDFLAGS} CGO_CPPFLAGS=${CGO_CPPFLAGS} GOOS=$@ GOARCH=amd64 go build ${MODFLAGS} ${LDFLAGS} -o dist/legend-$@-amd64 ./cmd/legend
 
-clean:
-	@rm -fr dist/
+build-web:
+	@npm run build
 
-test:
-	@go test ${MODFLAGS} ${TESTFLAGS} ./...
+lint-web:
+	@npm run lint
+
+clean:
+	@rm -fr dist pkg/web/public/app.js
 
 modules:
 	@CGO_LDFLAGS=${CGO_LDFLAGS} CGO_CPPFLAGS=${CGO_CPPFLAGS} go get -u ./... && go mod download && go mod tidy && go mod vendor
 
-.PHONY: all dev dist $(PLATFORMS) clean test modules
+.PHONY: all dev dist $(PLATFORMS) build-web lint-web clean modules
