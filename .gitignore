@@ -14,4 +14,10 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# Build output
 dist/
+
+# Embedded frontend
+web/node_modules
+web/public/app.js
+web/public/app.js.map
