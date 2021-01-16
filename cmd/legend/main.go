@@ -11,8 +11,7 @@ import (
 )
 
 var (
-	listen          = flag.String("listen", ":8888", "")
-	rekordboxPath   = flag.String("rekordboxPath", "/Applications/rekordbox 6/rekordbox.app", "")
+	listen          = flag.String("listen", "0.0.0.0:8888", "")
 	pollingInterval = flag.Duration("pollingInterval", time.Second*5, "")
 	version         = flag.Bool("version", false, "")
 )
@@ -25,7 +24,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	logger := log.New(os.Stderr, "[legend] ", log.LstdFlags)
+	logger := log.New(os.Stderr, "", log.LstdFlags)
 
 	options := &legend.Options{
 		Logger:   logger,
