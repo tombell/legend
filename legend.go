@@ -35,7 +35,7 @@ func Run(options *Options) error {
 
 	playlist := playlist.New()
 
-	mon := monitor.New(options.Logger, db, options.Interval, playlist)
+	mon := monitor.New(options.Logger, playlist, db, options.Interval)
 	go mon.Run()
 
 	errCh := make(chan error, 1)
