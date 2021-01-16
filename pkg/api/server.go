@@ -9,13 +9,14 @@ import (
 	"github.com/gorilla/websocket"
 
 	"github.com/tombell/legend/pkg/playlist"
+	"github.com/tombell/legend/pkg/web"
 )
 
 // Server serves the status of the playlist to clients via websockets.
 type Server struct {
 	logger   *log.Logger
-	server   *http.Server
 	playlist *playlist.Playlist
+	server   *http.Server
 }
 
 // New returns an initialised Server with the given playlist.
@@ -28,16 +29,23 @@ func New(logger *log.Logger, playlist *playlist.Playlist, listen string) *Server
 
 	return &Server{
 		logger:   logger,
-		server:   server,
 		playlist: playlist,
+		server:   server,
 	}
 }
 
 // Start registers the handler, and start listening for incoming connections.
 func (s *Server) Start(ch chan error) {
 	s.logger.Println("registering http handler...")
-	s.server.Handler = s.handler()
-	s.logger.Println("starting api server, listening on http://localhost:8888...")
+
+	mux := http.NewServeMux()
+	mux.Handle("/public/", http.FileServer(http.FS(web.FS)))
+	mux.Handle("/", s.handler())
+
+	s.server.Handler = mux
+
+	s.logger.Println("starting api server...")
+
 	if err := s.server.ListenAndServe(); err != nil {
 		ch <- err
 	}
