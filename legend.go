@@ -35,12 +35,12 @@ func Run(options *Options) error {
 
 	playlist := playlist.New()
 
+	mon := monitor.New(options.Logger, db, options.Interval, playlist)
+	go mon.Run()
+
 	errCh := make(chan error, 1)
 
-	mon := monitor.New(options.Logger, db, options.Interval, playlist)
 	srv := api.New(options.Logger, playlist, options.Listen)
-
-	go mon.Run()
 	go srv.Start(errCh)
 
 	ch := make(chan os.Signal)
