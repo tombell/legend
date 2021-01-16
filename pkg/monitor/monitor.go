@@ -30,18 +30,16 @@ func New(logger *log.Logger, db *sql.DB, interval time.Duration, playlist *playl
 }
 
 // Run starts the polling of the currently playing track in rekordbox.
-func (m *Monitor) Run(ch chan error) {
+func (m *Monitor) Run() {
 	if err := m.handle(); err != nil {
-		ch <- err
-		return
+		m.logger.Printf("polling failed: %v", err)
 	}
 
 	tick := time.Tick(m.interval)
 
 	for range tick {
 		if err := m.handle(); err != nil {
-			ch <- err
-			continue
+			m.logger.Printf("polling failed: %v", err)
 		}
 	}
 }
