@@ -14,18 +14,18 @@ import (
 // Monitor is a struct that polls rekordbox for the currently playing track.
 type Monitor struct {
 	logger   *log.Logger
+	playlist *playlist.Playlist
 	db       *sql.DB
 	interval time.Duration
-	playlist *playlist.Playlist
 }
 
 // New returns an initialised monitor.
-func New(logger *log.Logger, db *sql.DB, interval time.Duration, playlist *playlist.Playlist) *Monitor {
+func New(logger *log.Logger, playlist *playlist.Playlist, db *sql.DB, interval time.Duration) *Monitor {
 	return &Monitor{
 		logger:   logger,
+		playlist: playlist,
 		db:       db,
 		interval: interval,
-		playlist: playlist,
 	}
 }
 
