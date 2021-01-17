@@ -34,7 +34,7 @@ export default () => {
   return (
     <Fragment>
       {tracks.map((track, idx) => (
-        <Deck id={idx + 1} artist={track.artist} name={track.name} />
+        <Deck id={idx} artist={track.artist} name={track.name} />
       ))}
     </Fragment>
   );

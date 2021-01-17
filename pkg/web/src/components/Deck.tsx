@@ -16,7 +16,7 @@ export default ({
           class="font-weight-bold text-center w-50"
           style={{ background: '#ff0072' }}
         >
-          {`DECK ${['ONE', 'TWO'][id - 1]}`}
+          {`DECK ${['ONE', 'TWO'][id]}`}
         </h6>
       </div>
     </div>
