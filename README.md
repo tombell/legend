@@ -27,4 +27,14 @@ Coming soon.
 
 ## Usage
 
-Coming soon.
+You must have rekordbox running on the system that you plan on running `legend`
+on.
+
+Run `legend`, this will start the API server and rekordbox monitor.
+
+Visit http://localhost:8888/public/index.html in your browser to check that it
+is serving the overlay
+
+In OBS add a **Browser** source and set the URL to
+http://localhost:8888/public/index.html (you can change `localhost` to the IP
+address of the system `legend` is running on if you use OBS on another system)
