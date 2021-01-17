@@ -1,6 +1,7 @@
 # Legend
 
-API server for track information from [rekordbox][rekordbox].
+API server and web based overlay (for OBS) for track information from
+[rekordbox][rekordbox].
 
 [rekordbox]: https://rekordbox.com/en/
 
