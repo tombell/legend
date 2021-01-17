@@ -16,6 +16,9 @@ number of assumptions and opinions in mind.
 - It assumes you're only using 2 channels, and the first track is played on the
   first deck
 
+Due to limitations with rekordbox and how we're getting the track information,
+the track is only registered as playing/played after one minute.
+
 ## Installation
 
 Coming soon.
