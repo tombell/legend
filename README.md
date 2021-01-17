@@ -5,10 +5,11 @@ API server for track information from [rekordbox][rekordbox].
 [rekordbox]: https://rekordbox.com/en/
 
 This project couldn't have been built without inspiration from
-[PRACT-OBS][pract-obs] and [unbox][unbox].
+[PRACT-OBS][pract-obs], [unbox][unbox], and [supbox][supbox].
 
 [pract-obs]: https://github.com/LePopal/PRACT-OBS
 [unbox]: https://github.com/erikrichardlarson/unbox
+[supbox]: https://github.com/gabek/supbox
 
 Please note that since I built this project for myself, it is built with a
 number of assumptions and opinions in mind.
