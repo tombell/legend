@@ -9,6 +9,13 @@ This project couldn't have been built without inspiration from
 
 [pract-obs]: https://github.com/LePopal/PRACT-OBS
 
+Please note that since I built this project for myself, it is built with a
+number of assumptions and opinions in mind.
+
+- It assumes you're running macOS (this is my main platform I use rekordbox on)
+- It assumes you're only using 2 channels, and the first track is played on the
+  first deck
+
 ## Installation
 
 Coming soon.
