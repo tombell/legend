@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const http = require("http");
+
+const esbuild = require("esbuild");
+
+const buildJS = ({ src, dest, dev }) => {
+  try {
+    esbuild.build({
+      entryPoints: [src],
+      outfile: dest,
+      bundle: true,
+      minify: !dev,
+      watch: dev,
+    });
+  } catch {}
+};
+
+const serve = async (servedir, listen) => {
+  const { host, port } = await esbuild.serve({ servedir }, {});
+
+  const proxy = http.createServer((req, res) => {
+    const forwardRequest = (path) => {
+      const options = {
+        hostname: host,
+        port,
+        path,
+        method: req.method,
+        headers: req.headers,
+      };
+
+      const proxyReq = http.request(options, (proxyRes) => {
+        if (proxyRes.statusCode === 404) {
+          return forwardRequest("/");
+        }
+
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        proxyRes.pipe(res, { end: true });
+      });
+
+      req.pipe(proxyReq, { end: true });
+    };
+
+    forwardRequest(req.url);
+  });
+
+  proxy.listen(listen);
+};
+
+const dev = process.argv[2] !== "--prod";
+
+buildJS({
+  src: "pkg/web/src/index.tsx",
+  dest: "pkg/web/public/app.js",
+  dev,
+});
+
+if (dev) {
+  serve("public", 10001);
+  console.error("listening on http://localhost:10001");
+}
