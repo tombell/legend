@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { h } from "preact";
 
 export default ({
   id,
@@ -14,9 +14,9 @@ export default ({
       <div class="col-3">
         <h6
           class="font-weight-bold text-center w-50"
-          style={{ background: '#ff0072' }}
+          style={{ background: "#ff0072" }}
         >
-          {`DECK ${['ONE', 'TWO'][id]}`}
+          {`DECK ${["ONE", "TWO"][id]}`}
         </h6>
       </div>
     </div>

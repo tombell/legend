@@ -1,9 +1,9 @@
-import { h, Fragment } from 'preact';
-import { useState } from 'preact/hooks';
+import { h, Fragment } from "preact";
+import { useState } from "preact/hooks";
 
-import Deck from 'components/Deck';
+import Deck from "components/Deck";
 
-import useWebSocket from 'hooks/useWebSocket';
+import useWebSocket from "hooks/useWebSocket";
 
 interface Track {
   number: number;
@@ -17,7 +17,7 @@ export default () => {
     // { number: 2, artist: 'Roberto Surace', name: 'Joys (Purple Disco Machine Extended Remix)' },
   ]);
 
-  useWebSocket('ws://192.168.1.103:8888', (e) => {
+  useWebSocket("ws://192.168.1.103:8888", (e) => {
     const { history }: { history: Track[] } = JSON.parse(e.data);
 
     if (history.length === 1) {

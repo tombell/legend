@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { useEffect } from 'preact/hooks';
+import { useEffect } from "preact/hooks";
 
 export default function useWebSocket(
   host: string,
@@ -10,14 +10,14 @@ export default function useWebSocket(
     const socket = new WebSocket(host);
 
     socket.onopen = (e) => {
-      console.log('connected to websocket server', e);
+      console.log("connected to websocket server", e);
     };
 
     socket.onclose = (e) => {
       if (e.wasClean) {
-        console.log('disconnected from websocket server', e);
+        console.log("disconnected from websocket server", e);
       } else {
-        console.log('connection to websocket server died', e);
+        console.log("connection to websocket server died", e);
       }
     };
 
