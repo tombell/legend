@@ -19,8 +19,7 @@
     "preact": "^10.5.13"
   },
   "scripts": {
-    "start": "tsc --noEmit && ./esbuild",
-    "build": "tsc --noEmit && ./esbuild --prod",
+    "build": "tsc --noEmit && ./esbuild",
     "lint": "eslint --ext .ts,.tsx pkg/web/src"
   }
 }
