@@ -10,6 +10,6 @@ github.com/tombell/go-rekordbox
 github.com/tombell/go-rekordbox/internal/crypto
 # github.com/xeodou/go-sqlcipher v0.0.0-20200727080346-d681773ef093
 github.com/xeodou/go-sqlcipher
-# golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2
+# golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3
 ## explicit
 golang.org/x/crypto/blowfish
