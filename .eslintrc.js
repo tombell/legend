@@ -1,22 +1,27 @@
 module.exports = {
-  extends: ['airbnb-typescript', 'prettier'],
+  extends: ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
   parserOptions: {
-    project: './tsconfig.json',
+    project: "./tsconfig.json",
+  },
+  env: {
+    browser: true,
   },
   settings: {
     react: {
-      pragma: 'h',
-      version: '17',
+      pragma: "h",
+      version: "17",
     },
   },
   rules: {
-    '@typescript-eslint/comma-dangle': ['error', {
-      'arrays': 'always-multiline',
-      'exports': 'always-multiline',
-      'functions': 'never',
-      'imports': 'always-multiline',
-      'objects': 'always-multiline',
-    }],
-    'react/no-unknown-property': ['error', { ignore: ['class'] }],
+    "react/function-component-definition": "off",
+    "react/no-unknown-property": ["error", { ignore: ["class"] }],
+    "sort-imports": [
+      "error",
+      {
+        ignoreCase: false,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+      },
+    ],
   },
 };
