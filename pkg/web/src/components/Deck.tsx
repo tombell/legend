@@ -1,14 +1,16 @@
 import { h } from "preact";
 
+interface Props {
+  id: number;
+  artist: string;
+  name: string;
+}
+
 export default ({
   id,
   artist,
   name,
-}: {
-  id: number;
-  artist: string;
-  name: string;
-}) => (
+}: Props) => (
   <div key={`deck-${id}`} class="text-white">
     <div class="container ml-0 mt-3">
       <div class="col-3">
