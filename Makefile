@@ -9,8 +9,8 @@ LDFLAGS=-ldflags "-X main.Version=$(VERSION) -X main.Commit=$(COMMIT)"
 MODFLAGS=-mod=vendor
 TESTFLAGS=-cover
 
-CGO_LDFLAGS:=-L$(shell brew --prefix openssl)/lib
-CGO_CPPFLAGS:=-I$(shell brew --prefix openssl)/include
+CGO_LDFLAGS:=-L$(shell brew --prefix openssl@1.1)/lib
+CGO_CPPFLAGS:=-I$(shell brew --prefix openssl@1.1)/include
 
 PLATFORMS:=darwin
 
