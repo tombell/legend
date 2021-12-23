@@ -22,5 +22,5 @@ export default function useWebSocket(
     };
 
     socket.onmessage = onmessage;
-  }, []);
+  }, [host, onmessage]);
 }
