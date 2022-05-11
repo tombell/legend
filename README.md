@@ -1,5 +1,7 @@
 # Legend
 
+**This project has been discontinued**
+
 API server and web based overlay (for OBS) for track information from
 [rekordbox][rekordbox].
 
