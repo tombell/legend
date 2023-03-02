@@ -1,4 +1,4 @@
-# github.com/andreburgaud/crypt2go v1.1.0
+# github.com/andreburgaud/crypt2go v1.2.0
 ## explicit
 github.com/andreburgaud/crypt2go/ecb
 # github.com/gorilla/websocket v1.5.0
@@ -11,5 +11,4 @@ github.com/tombell/go-rekordbox/internal/crypto
 # github.com/xeodou/go-sqlcipher v0.0.0-20200727080346-d681773ef093
 github.com/xeodou/go-sqlcipher
 # golang.org/x/crypto v0.6.0
-## explicit
 golang.org/x/crypto/blowfish
